@@ -24,7 +24,7 @@
 
 //Added JW 02/02/24 ---
 #include <linux/gpio.h>
-#define HMC_DIR ()
+//#define HMC_DIR ()
 // --------------------
 // --------------------
 
@@ -289,11 +289,9 @@ struct hmc7044_chan_spec {
 	const char		*extended_name;
 };
 
-struct DIRcontrol {
-	struct gpio_chip
-
-
-};
+//struct DIRcontrol {
+//	struct gpio_chip
+//};
 
 struct hmc7044 {
 	struct spi_device		*spi;
