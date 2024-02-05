@@ -23,7 +23,7 @@
 #include <linux/jesd204/jesd204.h>
 
 //Added JW 02/02/24 ---
-//#include <linux/gpio.h>
+#include <linux/gpio.h>
 //#define HMC_DIR ()
 // --------------------
 // --------------------
@@ -348,7 +348,7 @@ static int hmc7044_write(struct iio_dev *indio_dev,
 			 unsigned int reg,
 			 unsigned int val)
 {
-	//dev_warn(&hmc->spi->dev, "Performing SPI write\n", val);
+	dev_warn(&hmc->spi->dev, "Performing SPI write\n", val);
 	struct hmc7044 *hmc = iio_priv(indio_dev);
 	unsigned char buf[3];
 	u16 cmd;
