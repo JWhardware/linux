@@ -23,7 +23,7 @@
 #include <linux/jesd204/jesd204.h>
 
 //Added JW 02/02/24 ---
-#include <linux/gpio.h>
+//#include <linux/gpio.h>
 //#define HMC_DIR ()
 // --------------------
 // --------------------
