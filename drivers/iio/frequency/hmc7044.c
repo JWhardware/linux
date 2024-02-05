@@ -12,6 +12,7 @@
 #include <linux/rational.h>
 #include <linux/debugfs.h>
 
+
 #include <linux/clk.h>
 #include <linux/clk-provider.h>
 
@@ -20,6 +21,12 @@
 #include <dt-bindings/iio/frequency/hmc7044.h>
 
 #include <linux/jesd204/jesd204.h>
+
+//Added JW 02/02/24 ---
+#include <linux/gpio.h>
+#define HMC_DIR ()
+// --------------------
+// --------------------
 
 #define HMC7044_WRITE		(0 << 15)
 #define HMC7044_READ		(1 << 15)
@@ -282,6 +289,12 @@ struct hmc7044_chan_spec {
 	const char		*extended_name;
 };
 
+struct DIRcontrol {
+	struct gpio_chip
+
+
+};
+
 struct hmc7044 {
 	struct spi_device		*spi;
 	u32				device_id;
@@ -337,6 +350,7 @@ static int hmc7044_write(struct iio_dev *indio_dev,
 			 unsigned int reg,
 			 unsigned int val)
 {
+	dev_warn(&hmc->spi->dev, "Performing SPI write\n", val);
 	struct hmc7044 *hmc = iio_priv(indio_dev);
 	unsigned char buf[3];
 	u16 cmd;
@@ -353,6 +367,7 @@ static int hmc7044_read(struct iio_dev *indio_dev,
 			unsigned int reg,
 			unsigned int *val)
 {
+	dev_warn(&hmc->spi->dev, "Performing SPI write then read\n", val);
 	struct hmc7044 *hmc = iio_priv(indio_dev);
 	unsigned char buf[3];
 	u16 cmd;
@@ -404,6 +419,8 @@ static int hmc7044_toggle_bit(struct iio_dev *indio_dev,
 
 static void hmc7044_read_write_check(struct iio_dev *indio_dev)
 {
+	dev_warn(&hmc->spi->dev, "Performing HMC7044 R/W check\n", val);
+	HMC_DIR_STATE = gpio_get_value(HMC_DIR);
 	struct hmc7044 *hmc = iio_priv(indio_dev);
 	unsigned int val;
 
