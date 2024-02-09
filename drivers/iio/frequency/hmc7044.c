@@ -22,12 +22,6 @@
 
 #include <linux/jesd204/jesd204.h>
 
-//Added JW 02/02/24 ---
-//#include <linux/gpio.h>
-//#define HMC_DIR ()
-// --------------------
-// --------------------
-
 #define HMC7044_WRITE		(0 << 15)
 #define HMC7044_READ		(1 << 15)
 #define HMC7044_CNT(x)		(((x) - 1) << 13)
@@ -289,10 +283,6 @@ struct hmc7044_chan_spec {
 	const char		*extended_name;
 };
 
-//struct DIRcontrol {
-//	struct gpio_chip
-//};
-
 struct hmc7044 {
 	struct spi_device		*spi;
 	u32				device_id;
@@ -348,7 +338,6 @@ static int hmc7044_write(struct iio_dev *indio_dev,
 			 unsigned int reg,
 			 unsigned int val)
 {
-	printk("Performing SPI write\n");
 	struct hmc7044 *hmc = iio_priv(indio_dev);
 	unsigned char buf[3];
 	u16 cmd;
@@ -365,7 +354,6 @@ static int hmc7044_read(struct iio_dev *indio_dev,
 			unsigned int reg,
 			unsigned int *val)
 {
-	printk("Performing SPI write then read\n");
 	struct hmc7044 *hmc = iio_priv(indio_dev);
 	unsigned char buf[3];
 	u16 cmd;
@@ -417,8 +405,6 @@ static int hmc7044_toggle_bit(struct iio_dev *indio_dev,
 
 static void hmc7044_read_write_check(struct iio_dev *indio_dev)
 {
-	printk("Performing HMC7044 R/W check\n");
-	//HMC_DIR_STATE = gpio_get_value(HMC_DIR);
 	struct hmc7044 *hmc = iio_priv(indio_dev);
 	unsigned int val;
 
