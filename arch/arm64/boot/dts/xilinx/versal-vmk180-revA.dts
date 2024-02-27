@@ -87,9 +87,6 @@
 			#phy-cells = <1>;
 			compatible = "ethernet-phy-id2000.a231";
 			reg = <0>;
-			reset-assert-us = <100>;
-			reset-deassert-us = <280>;
-			reset-gpios = <&gpio1 37 GPIO_ACTIVE_LOW>;
 		};
 	};
 };
